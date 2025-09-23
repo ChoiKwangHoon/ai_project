@@ -1,69 +1,87 @@
-# 🚀 Entra App Management Copilot – 단계별 로드맵
-> 기반 기술: **Azure OpenAI Service, Azure AI Search, Azure AI Vision, Azure Document Intelligence, Microsoft Graph API**
+# 🚀 Entra App Management Copilot
+
+> **목표**  
+> 사내 KTAUTH 시스템과 Entra ID App 관리를 **Azure AI 기반**으로 효율화합니다.  
+
 
 ---
 
-## 📌 0단계 — PoC
-**목표**  
-- FAQ 챗봇 (Streamlit UI → Azure AI Search → Azure OpenAI)  
-- 답변과 함께 **Confluence 원문 URL** 표시  
-- 구성도 요약(라이트): PDF/이미지 업로드 → OCR → OpenAI 요약 리포트
+## 📌 아키텍처 개요
 
-**산출물**  
-- 데모 스크립트 3건 (Entra App 가이드 / OIDC 셋업 / 로그인 오류)  
-- 샘플 리포트 (구성요약 + 권한 후보 + 주의사항)
+- **FAQ 챗봇**: Confluence 가이드 문서를 기반으로 RAG + Azure OpenAI  
+- **Azure 구성도 분석**: PDF/이미지 → Azure AI Vision + Document Intelligence → 설명/권한 추천  
+- **Entra App 자동 등록**: KAUTH 승인 → Webhook 이벤트 → Microsoft Graph API로 자동 앱 생성  
+- **대시보드**: Power BI + Log Analytics → 신청 현황, 보안 경고, FAQ 피드백
 
 ---
 
-## 📌 1단계 — 지식베이스·챗봇 고도화 (2~4주)
-**목표**  
-- 운영 가능한 RAG 기반 가이드 챗봇  
-- Azure AI Search에 Confluence 문서 PDF/이미지 인덱싱  
+## 📍 단계별 로드맵
 
-**주요 기능**  
-- Skillset: OCR, language detection, text normalizer  
-- 스키마: `title, url, content, embedding`  
-- 검색 품질 개선 (synonyms, boosting, k값 튜닝)  
-- UX: "관련 문서 더보기", "정확/부정확 피드백" 버튼  
+### 0단계 — PoC 
+- Streamlit 기반 FAQ 챗봇 (Azure AI Search + OpenAI)  
+- 답변 + Confluence 원문 URL 표시  
+- 구성도 요약(라이트): 첨부 PDF/이미지 → OCR → OpenAI 요약  
 
-**성과 지표**  
-- 답변 정확도 ≥ 80%  
-- 평균 응답 속도 ≤ 2.5초  
-- 운영비용 추정 리포트 제공  
+### 1단계 — 지식베이스·챗봇 고도화 (2~4주)
+- Azure AI Search에 Confluence 문서/이미지 인덱싱  
+- Synonyms/Boosting 적용, k값 최적화  
+- UI에 “관련 문서 더보기” / “피드백 버튼” 추가  
 
----
+### 2단계 — Azure 구성도 분석 서비스 (4~8주)
+- Document Intelligence로 텍스트/도형 추출  
+- Azure AI Vision으로 리소스 아이콘 식별 (VM, App Service 등)  
+- OpenAI + AI Search로 **구성 요약/권한 추천/보안 주의사항** 생성  
+- KAUTH 신청서 UI에 리포트 탭 추가  
 
-## 📌 2단계 — Azure 구성도 분석 서비스 (4~8주)
-**목표**  
-- 첨부 다이어그램 → 관리자용 리포트 자동 생성  
+### 3단계 — Entra App 자동 등록 서비스 (승인 연동) (8~10주)
+- 승인 이벤트(Webhook) → Azure Function/Container App → Microsoft Graph API 호출  
+- 앱 생성 + 권한 매핑 + Redirect URI 등록  
+- 아이템포턴시 키로 중복 방지  
+- 실패 시 알림 및 롤백 처리  
 
-**주요 기능**  
-- Document Intelligence: 텍스트/표/도형 관계 추출  
-- Azure AI Vision: **Azure 리소스 아이콘 식별**  
-- AI Search + OpenAI: 구성 설명 + 권한 추천 + 보안 체크  
-- 리포트 출력:  
-  - 구성 요약  
-  - 예상 권한 후보  
-  - 보안 주의사항 (예: Public Storage 노출)  
-
-**성과 지표**  
-- 관리자 검토 시간 50% 절감  
-- 권한 과다 요청 감지율 측정  
+### 4단계 — 운영/확장 (10~12주+)
+- Power BI 대시보드 (신청량, 실패율, 보안 경고)  
+- 챗봇 피드백 기반 문서 자동 개선  
+- 보안 고도화 (민감 권한 요청 시 추가 근거 요구)  
+- 사내 레지스트리로 OIDC 모듈 배포, 샘플 앱 템플릿 제공  
 
 ---
 
-## 📌 3단계 — Entra App 자동 등록 서비스 (승인 연동) (8~10주)
-**목표**  
-- 승인 완료 이벤트 기반 **자동 앱 등록**  
+## 🌐 네트워크 시나리오
 
-**연동 방식**  
-- KAUTH 승인 → Webhook 호출 or 승인 테이블 폴링  
-- 이벤트 Payload:  
-  ```json
-  {
-    "appName": "SampleApp",
-    "owner": "홍길동",
-    "redirectUris": ["https://sample/callback"],
-    "permissions": ["User.Read"],
-    "tenantId": "xxxx-xxxx"
-  }
+### 시나리오 A — 대외 통신 허용
+- On-Prem → API Management(Private Endpoint) → Azure OpenAI / AI Search / Storage  
+
+### 시나리오 B — 대외 통신 불가
+- DMZ API Gateway 개방, 내부는 프록시 경유  
+- 승인 이벤트만 Outbound 단일 경로 허용  
+- ExpressRoute or Site-to-Site VPN 사용 가능  
+
+---
+
+## 🎯 평가 기준 매핑
+
+- **기능 구현**: 챗봇 → 구성도 분석 → 자동 등록(승인 연동)  
+- **기술 구현**: AI Search 스키마 최적화, Graph API 아이템포턴시/재시도  
+- **UX**: 출처 URL, 리포트 탭, 피드백 루프, 대시보드  
+- **발표/데모**: 실시간 챗봇, 첨부 분석 리포트, 승인 이벤트 → 자동 등록 시연  
+- **혁신성/확장성**: 다이어그램 인식 + 권한 추천 + 정책 위반 감지 → Copilot 지향  
+
+---
+
+## 📦 실행 방법 (PoC 기준)
+
+```bash
+# 1. Python 3.12 가상환경 생성
+python -m venv venv
+source venv/bin/activate   # (Linux/Mac)
+venv\Scripts\activate      # (Windows)
+
+# 2. 의존성 설치
+pip install -r requirements.txt
+
+# 3. 환경변수 설정 (.env)
+OPENAI_API_KEY=sk-xxxxxx
+
+# 4. 실행
+streamlit run app.py
