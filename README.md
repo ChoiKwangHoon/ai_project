@@ -1,7 +1,7 @@
 # 🚀 Entra App Management Copilot
 
 > **목표**  
-> 사내 KTAUTH 시스템과 Entra ID App 관리를 **Azure AI 기반**으로 효율화합니다.  
+> 사내 KTAUTH 시스템과 Entra ID App 관리를 **Azure AI 기반** 업무 효율화
 
 
 ---
@@ -69,7 +69,7 @@
 
 ---
 
-## 📦 실행 방법 (PoC 기준)
+## 📦 실행 방법 (PoC)
 
 ```bash
 # 1. Python 3.12 가상환경 생성
