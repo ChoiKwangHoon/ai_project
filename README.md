@@ -7,13 +7,52 @@
 ---
 
 ## 📌 아키텍처 개요
-
+- **Entra App 신청/관리 효율화 – Azure 기반 아키텍처
 - **FAQ 챗봇**: Confluence 가이드 문서를 기반으로 RAG + Azure OpenAI  
 - **Azure 구성도 분석**: PDF/이미지 → Azure AI Vision + Document Intelligence → 설명/권한 추천  
 - **Entra App 자동 등록**: KAUTH 승인 → Webhook 이벤트 → Microsoft Graph API로 자동 앱 생성  
 - **대시보드**: Power BI + Log Analytics → 신청 현황, 보안 경고, FAQ 피드백
 
----
+## 📂 프로젝트 구조 (POC)
+
+```plaintext
+entra-app-copilot/
+│── README.md                # 프로젝트 소개 및 실행 방법 (완성본)
+│── requirements.txt         # Python 3.12 환경 의존성
+│── .env.example             # 환경 변수 예시 (OPENAI_API_KEY 등)
+│
+├── src/                     # 소스코드 모듈
+│   ├── app.py               # Streamlit 진입점
+│   ├── config.py            # 환경설정
+│   ├── data_loader.py       # 문서 로드 및 분할
+│   ├── vector_store.py      # 벡터DB (FAISS/AI Search 연동)
+│   ├── rag_chain.py         # RAG 체인 (출처 포함)
+│   ├── db_manager.py        # SQLite DB (FAQ 로그)
+│   ├── ui_components.py     # Streamlit UI 모듈
+│   └── utils/               # 유틸리티
+│       ├── azure_connector.py   # (장기) Azure AI Search/Graph API 연동
+│       └── vision_parser.py     # (장기) Azure AI Vision/Doc Intelligence 분석기
+│
+├── docs/                    # 문서 & 다이어그램
+│   ├── architecture.png     # 아키텍처 다이어그램
+│   └── roadmap.md           # 상세 로드맵 문서
+│
+└── tests/                   # 단위 테스트
+    ├── test_loader.py
+    ├── test_vector_store.py
+    └── test_chatbot.py
+## 🔗 Azure 서비스 매핑
+
+| 기능 영역               | 활용 Azure 서비스                        | 설명 |
+|-------------------------|------------------------------------------|------|
+| **임직원 Q&A 챗봇**     | **Azure OpenAI Service**                 | GPT-4o / GPT-35-turbo 기반 자연어 Q&A |
+|                         | **Azure AI Search**                      | Confluence 가이드 문서 인덱싱 + 벡터 검색 |
+| **Azure 구성도 분석**   | **Azure AI Vision**                      | 이미지 다이어그램에서 Azure 리소스 아이콘 자동 인식 (VM, App Service 등) |
+|                         | **Azure Document Intelligence**          | PDF/PPT 구성도 내 텍스트·도형 추출 (OCR) |
+|                         | **Azure OpenAI + AI Search**             | 추출 결과를 바탕으로 구성 설명·권한 추천 생성 |
+| **Entra App 자동 등록** | **Microsoft Graph API**                  | 승인 이벤트 연동 → Entra App 자동 생성 및 권한 매핑 |
+| **알림/이벤트 처리**    | **Azure Event Grid + Logic Apps**        | 승인 완료 이벤트 트리거 → 이메일/MS Teams 알림 |
+| **로깅/보안 관리**      | **Azure Monitor + Log Analytics**        | 로깅, 감사 추적, 보안 정책 준수 확인 |
 
 ## 📍 단계별 로드맵
 
