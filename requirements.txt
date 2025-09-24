@@ -3,11 +3,10 @@ python-dotenv==1.0.1
 streamlit==1.37.0
 
 # --- OpenAI & LangChain ---
-openai==1.40.2
+openai==1.40.6
 langchain==0.2.12
 langchain-community==0.2.10
 langchain-openai==0.1.19
-tiktoken==0.7.0
 
 # --- 벡터 DB ---
 faiss-cpu==1.8.0

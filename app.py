@@ -2,15 +2,16 @@
 app.py
 - Streamlit 메인 실행 파일
 """
-from data_loader import load_and_split_pdf
-from vector_store import build_vector_store
-from rag_chain import create_rag_chain_with_sources
-from db_manager import DBManager
-from ui_components import chatbot_tab, dashboard_tab
-from config import (
+from src.data_loader import load_and_split_pdf
+from src.vector_store import build_vector_store
+from src.rag_chain import create_rag_chain_with_sources
+from src.db_manager import DBManager
+from src.ui_components import chatbot_tab, dashboard_tab
+from src.config import (
     PDF_FILE, LLM_MODEL, EMBEDDING_MODEL,
     PG_HOST, PG_PORT, PG_DB, PG_USER, PG_PASSWORD
 )
+
 
 
 # 데이터 로드 & 벡터DB 생성

@@ -1,22 +1,31 @@
 """
 config.py
-- 전역 설정값 정의
+- 프로젝트 전역 설정 (Azure OpenAI 기준)
 """
-
 import os
 from dotenv import load_dotenv
 
-# Load .env
+# .env 파일 불러오기
 load_dotenv()
 
-# 모델 설정
-LLM_MODEL = "gpt-4o-mini"
-EMBEDDING_MODEL = "text-embedding-3-small"
+# -------------------------------
+# 🔹 Azure OpenAI 설정
+# -------------------------------
+LLM_MODEL = os.getenv("AZURE_LLM_DEPLOYMENT", "gpt-4o-mini")
+EMBEDDING_MODEL = os.getenv("AZURE_EMBEDDING_DEPLOYMENT", "text-embedding-3-small")
 
-# PDF 문서 경로
-PDF_FILE = "entra_app_guide.pdf"
+AZURE_OPENAI_KEY = os.getenv("AZURE_OPENAI_KEY")
+AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION", "2024-05-01-preview")
 
-# PostgreSQL 설정
+# -------------------------------
+# 🔹 PDF 문서 경로
+# -------------------------------
+PDF_FILE = os.path.join(os.path.dirname(__file__), "..", "entra_app_guide.pdf")
+
+# -------------------------------
+# 🔹 PostgreSQL 설정
+# -------------------------------
 PG_HOST = os.getenv("PG_HOST", "localhost")
 PG_PORT = os.getenv("PG_PORT", "5432")
 PG_DB = os.getenv("PG_DB", "entra_db")
