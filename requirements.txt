@@ -1,0 +1,24 @@
+# Core
+streamlit==1.49.1
+python-dotenv==1.0.1
+
+# Azure SDKs
+azure-identity==1.16.1
+azure-keyvault-secrets==4.7.0
+azure-search-documents==11.4.0b11   # 최신 벡터검색 지원 베타버전
+
+# LangChain & LLM
+langchain==0.3.4
+langchain-openai==0.2.3
+langchain-community==0.3.3
+openai==1.56.0   # langchain-openai 요구사항 충족
+
+# Observability
+langsmith==0.1.126   # 최신 버전으로 업데이트
+langfuse==2.40.0
+
+# PDF ingestion
+pypdf==5.1.0
+
+# Utils
+tiktoken==0.8.0

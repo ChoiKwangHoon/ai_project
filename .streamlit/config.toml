@@ -1,0 +1,11 @@
+[server]
+# 기본 실행 포트
+port = 8501
+
+[logger]
+# 로그 레벨 (info/debug)
+level = "info"
+
+[theme]
+base = "light"          # 라이트 테마
+primaryColor = "#2563eb" # Azure 블루 느낌

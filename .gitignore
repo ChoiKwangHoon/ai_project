@@ -1,0 +1,32 @@
+# ===== Python 기본 =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+dist/
+build/
+
+# ===== 가상환경 =====
+.venv/
+venv/
+venv/*
+env/
+
+# ===== 환경변수 파일 =====
+.env
+.env.*
+
+# ===== 로그/출력 =====
+logs/
+*.log
+
+# ===== IDE 관련 =====
+.vscode/
+.idea/
+*.swp
+
+# ===== OS/기타 =====
+.DS_Store
+Thumbs.db
