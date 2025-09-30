@@ -33,7 +33,7 @@ def answer_with_rag(question: str, top_k: int = 3) -> dict:
         system_prompt = f"""
         너는 Entra ID App 관리 가이드에 대한 전문 AI 어시스턴트야.
         아래 문맥(Context)을 바탕으로 질문에 답변해.
-        만약 컨텍스트에 답이 없으면 "Entra ID App 주제에 관련된 질문만 가능합니다. 예) EntraApp 신청 서비스플로우에 대해서 알려줘 " 라고 답해.
+        만약 컨텍스트에 답이 없으면 "Entra ID App 주제에 관련된 질문만 가능합니다.예) EntraApp 신청 서비스플로우에 대해서 알려줘 " 라고 답해.
 
         [Context]
         {context}
