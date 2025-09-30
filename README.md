@@ -1,3 +1,7 @@
+** MVP URL **
+https://wa-khchoi-webapp-mvp-aqd3bmfwa2czfgex.koreacentral-01.azurewebsites.net
+
+
 # 🤖 Entra ID App Guide Chatbot
 
 **AI 기반 문서 검색 및 질의응답 서비스**
