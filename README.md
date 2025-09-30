@@ -46,6 +46,7 @@ Azure OpenAI + Azure Cognitive Search + Streamlit 기반 **Entra ID App 가이�
 ---
 
 ## 📂 디렉토리 구조
+---
 ai_project/
 ├── app/
 │   ├── config.py                # 환경설정 로더
