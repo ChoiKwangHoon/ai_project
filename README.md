@@ -20,11 +20,14 @@ Azure OpenAI + Azure Cognitive Search + Streamlit 기반 **Entra ID App 가이�
 ---
 
 ## 🛠️ 아키텍처
-사용자 ─▶ Streamlit UI ─▶ RAG Chain (Retriever + LLM)
-│
-├─▶ Azure Cognitive Search (벡터+키워드 검색)
-│
-└─▶ Azure OpenAI (GPT-4o-mini, Embedding 모델)
+사용자
+  │
+  └─▶ Streamlit UI
+        │
+        └─▶ RAG Chain (Retriever + LLM)
+              │
+              ├─▶ Azure Cognitive Search (벡터+키워드 검색)
+              └─▶ Azure OpenAI (GPT-4o-mini, Embedding 모델)
 
 문서 소스: Blob Storage (PDF) → Indexer → Search Index
 
@@ -45,19 +48,19 @@ Azure OpenAI + Azure Cognitive Search + Streamlit 기반 **Entra ID App 가이�
 ## 📂 디렉토리 구조
 ai_project/
 ├── app/
-│ ├── config.py # 환경설정 로더
-│ ├── ingest/
-│ │ └── indexer.py # PDF → Azure Search 인덱싱
-│ ├── rag/
-│ │ ├── retriever.py # Azure Search 문서 검색
-│ │ └── chain.py # RAG 체인 (Retriever + LLM)
-│ └── ui/
-│ └── streamlit_app.py # Streamlit 메인 UI
-├── docs/ # PDF 문서 저장
+│   ├── config.py                # 환경설정 로더
+│   ├── ingest/
+│   │   └── [indexer.py](http://_vscodecontentref_/0)           # PDF → Azure Search 인덱싱
+│   ├── rag/
+│   │   ├── retriever.py         # Azure Search 문서 검색
+│   │   └── chain.py             # RAG 체인 (Retriever + LLM)
+│   └── ui/
+│       └── streamlit_app.py     # Streamlit 메인 UI
+├── docs/                        # PDF 문서 저장
 ├── .streamlit/
-│ └── config.toml # UI 테마 및 옵션
-├── .env # 환경 변수 설정
-└── README.md
+│   └── config.toml              # UI 테마 및 옵션
+├── .env                         # 환경 변수 설정
+└── [README.md](http://_vscodecontentref_/1)
 
 ---
 
