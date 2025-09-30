@@ -7,15 +7,16 @@ Azure OpenAI + Azure Cognitive Search + Streamlit 기반 **Entra ID App 가이�
 
 ## 🚀 프로젝트 개요
 
-### 문제점
-- 기존 KTAUTH 시스템 Entra App 신청 가이드 문서가 **PDF 형태로만 제공**되어 검색 불편
-- 사용자들은 필요한 정보를 빠르게 찾기 어려움
-
-### 해결 방안
-- PDF 문서를 Azure Blob Storage에 업로드
+- 기존 KTAUTH 시스템 Entra App 신청 가이드 문서가 KT Confluence에 WIKI 문서로 등록이 되어 있음.
+- 임직원들은 필요한 정보를 빠르게 찾기 어려움.
+- 임직원들의 편의를 위해 빠르게 정보를 찾을수 있도록 ChatBot으로 정보 제공 (PDF파일 업로드형태)
 - Azure Cognitive Search에서 자동 인덱싱 및 벡터 검색 구성
 - Azure OpenAI GPT 모델과 연동해 **질의응답 Chatbot** 제공
 - Streamlit UI로 간단히 사내 포털에서 접근 가능
+
+## 추후 개선안
+- KT Confluence에 등록 되어있는 Entra APP 가이드문서를 Cofluence API를 이용해 업데이트시 자동으로 RAG 학습형태로 변경
+
 
 ---
 

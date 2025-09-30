@@ -1,11 +1,12 @@
 # Core
 streamlit==1.49.1
 python-dotenv==1.0.1
+pydantic
 
 # Azure SDKs
 azure-identity==1.16.1
 azure-keyvault-secrets==4.7.0
-azure-search-documents==11.4.0b11   # 최신 벡터검색 지원 베타버전
+azure-search-documents==11.5.3
 
 # LangChain & LLM
 langchain==0.3.4

@@ -61,7 +61,7 @@ def embed_texts(chunks: List[str]) -> List[List[float]]:
     client = AzureOpenAI(
         api_key=AppConfig.AOAI_API_KEY,
         api_version=AppConfig.AOAI_API_VERSION,
-        azure_endpoint=AppConfig.AOAI_ENDPOINT,
+        azure_endpoint=AppConfig.AOAI_ENDPOINT if AppConfig.AOAI_ENDPOINT is not None else "",
     )
 
     response = client.embeddings.create(

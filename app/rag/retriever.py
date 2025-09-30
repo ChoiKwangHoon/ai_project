@@ -27,6 +27,9 @@ def search_top_k(query: str, top_k: int = 3):
         logger.info("SearchClient 생성 성공: index=%s", AppConfig.AIS_INDEX)
 
         # ✅ OpenAI 임베딩 생성
+        if AppConfig.AOAI_ENDPOINT is None:
+            logger.error("❌ AOAI_ENDPOINT가 None입니다. 올바른 엔드포인트를 설정하세요.")
+            return []
         embedding_client = AzureOpenAI(
             azure_endpoint=AppConfig.AOAI_ENDPOINT,
             api_key=AppConfig.AOAI_API_KEY,

@@ -47,19 +47,16 @@ st.markdown(
 
     /* ===== 컨텍스트 박스 폭 조정 ===== */
     div[data-testid="stExpander"] {
-        max-width: 900px !important;   /* 필요 시 100% */
-        width: 900px !important;
+        max-width: 600px !important;
     }
 
-    .context-pre {
-        white-space: pre-wrap;   /* 줄바꿈 & 공백 유지 */
-        word-break: break-word;  /* 긴 단어는 자동 줄바꿈 */
+    pre.context-pre {
+        white-space: pre-wrap;
+        word-break: break-word;
         background-color: #fff8dc;
-        padding: 10px;
+        padding: 8px;
         border-radius: 8px;
-        font-family: monospace;  /* 코드 스타일 */
-        font-size: 14px;
-        line-height: 1.5;
+        font-family: monospace;
     }
 
     /* ===== 사이드바 버튼 스타일 (Azure 블루) ===== */
@@ -97,18 +94,15 @@ if "env_name" not in st.session_state:
 # ===== 공통 함수 =====
 def render_bubble(role: str, content: str):
     cls = "user-bubble" if role == "user" else "assistant-bubble"
-    st.markdown(
-        f'<div class="chat-container"><div class="{cls}">{html.escape(content)}</div></div>',
-        unsafe_allow_html=True,
-    )
+    with st.container():
+        st.markdown(f'<div class="{cls}">{content}</div>', unsafe_allow_html=True)
 
 def render_context_box(context_text: str):
+    """컨텍스트 박스 (접이식, 고정폭 500px, 고정폭 글꼴, 노란색 계열 텍스트)"""
     if not context_text:
         return
     with st.expander("📖 참고 문서 컨텍스트", expanded=False):
-        # HTML escape만 적용 → 공백/줄바꿈 그대로 유지됨
-        safe_text = html.escape(context_text).replace("\n", "<br>") # ✅ 변경: escape_markdown 대신 html.escape
-
+        safe_text = html.escape(context_text)  # ✅ 변경: escape_markdown 대신 html.escape
         st.markdown(
             f'<pre class="context-pre">{safe_text}</pre>',
             unsafe_allow_html=True,
