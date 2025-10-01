@@ -26,7 +26,9 @@ greeting_prompt = PromptTemplate.from_template(
 guide_prompt = PromptTemplate.from_template(
     "너는 Entra ID App 관리 가이드 전문 AI야. 아래 문맥을 참고해 답변해.\n[Context]\n{context}\n질문: {question}"
 )
-default_prompt = PromptTemplate.from_template("Entra ID App 주제에 관련된 질문만 가능합니다.")
+default_prompt = PromptTemplate.from_template(
+    "죄송합니다. Entra ID App과 관련된 질문만 답변할 수 있습니다. 다른 질문이 있다면 말씀해 주세요."
+)
 llm = AzureChatOpenAI(
     azure_endpoint=AppConfig.AOAI_ENDPOINT,
     api_key=SecretStr(AppConfig.AOAI_API_KEY) if AppConfig.AOAI_API_KEY is not None else None,
@@ -45,7 +47,7 @@ def route_func(inputs):
     question = inputs["question"].lower()
     if "안녕" in question or "hello" in question or "hi" in question:  # "hi" 추가
         return "greeting"
-    elif "앱" in question or "가이드" in question or "entra" in question or "entraApp" in question or "KTAUTH" in question:
+    elif any(keyword in question for keyword in ["앱", "가이드", "entra", "entraApp", "KTAUTH"]):
         return "guide"
     else:
         return "default"
