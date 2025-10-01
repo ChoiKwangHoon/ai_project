@@ -20,7 +20,7 @@ https://wa-khchoi-webapp-mvp-aqd3bmfwa2czfgex.koreacentral-01.azurewebsites.net
 - 기존 KTAUTH 시스템 Entra App 신청 가이드 문서가 KT Confluence에 WIKI 문서로 등록이 되어 있음.
 - 임직원들은 필요한 정보를 빠르게 찾기 어려움.
 - 임직원들의 편의를 위해 빠르게 정보를 찾을수 있도록 ChatBot으로 정보 제공 (PDF파일 업로드형태)
-- Azure Cognitive Search에서 자동 인덱싱 및 벡터 검색 구성
+- Azure AI Search에서 자동 인덱싱 및 벡터 검색 구성
 - Azure OpenAI GPT 모델과 연동해 **질의응답 Chatbot** 제공
 - Streamlit UI로 간단히 사내 포털에서 접근 가능
 
